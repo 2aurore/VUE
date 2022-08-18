@@ -1,19 +1,21 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <LoginForm msg="LOGIN"></LoginForm>
-  <!-- <JoinForm msg="JOIN US"></JoinForm> -->
+  <!-- <LoginForm msg="LOGIN"></LoginForm> -->
   <BoardList msg="BOARD"></BoardList>
+  <!-- <BoardDetail msg="BOARD"></BoardDetail> -->
 </template>
 
 <script>
-import LoginForm from './components/LoginForm.vue'
-// import BoardList from './components/board/BoardList.vue'
+// import LoginForm from './components/LoginForm.vue'
+import BoardList from './components/board/BoardList.vue'
+// import BoardDetail from './components/board/BoardDetail.vue'
 
 export default {
   name: 'App',
   components: {
-    LoginForm
-    // BoardList
+    // LoginForm
+    BoardList
+    // BoardDetail
 }
 }
 </script>
@@ -28,6 +30,5 @@ body{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  
 }
 </style>

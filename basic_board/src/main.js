@@ -8,7 +8,7 @@ import App from './App.vue'
 
 createApp(App).mount('#app')
 createApp(App).use(Vuex)
-createApp.prototype.$axios = axios
+createApp.prototype.axios = axios
 
 
 

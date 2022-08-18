@@ -2,15 +2,16 @@
   <!-- MODAL popup layout -->
   <div class="black-bg" v-if="joinStatus">
     <div class="white-bg">
-      <div style="width: 80%;">
+      <div style="width: 75%">
         <h2>JOIN US</h2>
         <ul>
           <li>email <input type="email" v-model="email" /></li>
           <li>name <input v-model="name" /></li>
-          <li>password <input type="password" /></li>
-          <li>password check <input type="password" /></li>
+          <li>password <input type="password" v-model="password" /></li>
+          <li><input type="password" v-model="passwordCheck" /></li>
           <li>
-            {{ passwordCheck }} <v-btn small @click="onCheck">check</v-btn>
+            <span style="font-size: small">{{ pwCheckAlert }}</span>
+            <v-btn small @click="onPwSecurityCheck" class="ckBtn">check</v-btn>
           </li>
           <li>city <input v-model="city" /></li>
           <li>street <input v-model="street" /></li>
@@ -29,14 +30,14 @@
       <div>
         <ul style="text-align: center">
           <li>
-            <input type="email" v-model="email" placeholder="ID(E-mail)" />
+            <input type="email" v-model="email" placeholder="ID: example@email.com" />
           </li>
           <li>
             <input type="password" v-model="password" placeholder="Password" />
           </li>
         </ul>
-        <v-btn large @click="onClickLogin" class="vBtn">GO</v-btn>
-        <v-btn large @click="joinStatus = true" class="vBtn">Join us</v-btn>
+        <v-btn large @click="joinStatus = true" class="vBtn">SIGN UP</v-btn>
+        <v-btn large @click="onClickLogin" class="vBtn">SIGN IN</v-btn>
       </div>
     </div>
   </div>
@@ -47,9 +48,11 @@ export default {
   name: "LoginForm",
   data: () => ({
     joinStatus: false,
-    passwordCheck: "",
     email: "",
     password: "",
+    passwordCheck: "",
+    pwSecurityStatus: false,
+    pwCheckAlert: "",
     name: "",
     city: "",
     street: "",
@@ -61,12 +64,13 @@ export default {
       //console.log("onClickLogin press");
       console.log(this.$data);
       // const URL = '/auth/login';
-      const URL = "https://jssampletest.herokuapp.com/api/auth/login";
+      const URL = "https://jssampletest.herokuapp.com/api";
 
       // let callUrl = apiBaseUrl + URL;
       // console.log(callUrl);
       this.$axios.get(URL, [
-        {
+        { 
+          path: "/auth/login",
           headers: {
             accept: "*/*",
             "Content-Type": "application/json",
@@ -77,10 +81,31 @@ export default {
     },
     // 회원가입 data 전달
     onClickJoin() {
-      console.log(this.$data);
+      // console.log(this.$data);
+      if (!this.pwSecurityStatus) {
+        alert("비밀번호 중복체크를 확인해주세요.");
+      } else {
+        //회원가입 API 호출
+      }
     },
     // password 중복체크
-    onCheck() {},
+    onPwSecurityCheck() {
+      let pw_1 = this.$data.password;
+      let pw_2 = this.$data.passwordCheck;
+      if (pw_1 == "" && pw_2 == "") {
+        this.$data.pwCheckAlert = "비밀번호를 입력하세요.";
+      } else {
+        if (pw_1 == pw_2) {
+          this.$data.pwCheckAlert = "비밀번호가 일치합니다.";
+          this.pwSecurityStatus = true;
+          console.log("일치:", this.pwSecurityStatus);
+        } else {
+          this.$data.pwCheckAlert = "비밀번호가 일치하지 않습니다.";
+          this.pwSecurityStatus = false;
+          console.log("불일치:", this.pwSecurityStatus);
+        }
+      }
+    },
   },
   props: {
     msg: String,
@@ -116,6 +141,10 @@ div {
 
 .vBtn {
   margin: 20px;
+}
+
+.ckBtn {
+  margin-left: 5px;
 }
 
 ul {
