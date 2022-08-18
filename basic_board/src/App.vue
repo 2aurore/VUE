@@ -1,30 +1,33 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <LoginForm msg="LOGIN"></LoginForm>
   <!-- <JoinForm msg="JOIN US"></JoinForm> -->
   <BoardList msg="BOARD"></BoardList>
 </template>
 
 <script>
-// import LoginForm from './components/LoginForm.vue'
-import BoardList from './components/board/BoardList.vue'
+import LoginForm from './components/LoginForm.vue'
+// import BoardList from './components/board/BoardList.vue'
 
 export default {
   name: 'App',
   components: {
-  //   LoginForm
-    BoardList
+    LoginForm
+    // BoardList
 }
 }
 </script>
 
 <style>
+body{
+  margin: 0 auto;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  
 }
 </style>
