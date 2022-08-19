@@ -1,29 +1,34 @@
 <template>
-  <div>
-    <h1>{{ msg }}</h1>
+  <div id="section">
+    <h1>BOARD</h1>
     <div>
       <p class="titleTop" style="align: left">제목</p>
       <p class="titleTop">조회수</p>
     </div>
-    <div v-for="list in list" :key="list.seq">
-      <div>
-        <p class="title">
-          <a @click="openBoardDetail">
-            {{ list.title }}
-          </a>
-          <span style="font-size: small">{{ list.viewCount }}</span>
-        </p>
-      </div>
+    <div v-for="(list, index) in list" :key="index">
+      <p class="title">
+        <span style="font-size: small; margin: 3px">{{ index + 1 }}</span>
+        <a @click="openBoardDetail" :seq="list.seq">
+          {{ list.title }}
+        </a>
+        <span style="font-size: small">{{ list.viewCount }}</span>
+      </p>
     </div>
   </div>
 </template>
 
 <script>
+import router from "../../router/router.js";
+// const fetchBoards = () => {
+//   console.log("");  
+// };
+
 export default {
   name: "BoardList",
   data() {
     return {
-      // this.getAllBoard()
+      // totalSize: this.getAllBoard().totalSize,
+      // list: this.getAllBoard().list,
       totalSize: 7,
       list: [
         {
@@ -240,7 +245,7 @@ export default {
           updateDate: "2021-12-23T05:44:59.098825",
         },
         {
-          seq: 16,
+          seq: 17,
           title: "asssssssssssssssssss",
           content: "asdsssssssssssss",
           viewCount: 15,
@@ -254,20 +259,30 @@ export default {
   },
 
   methods: {
-    openBoardDetail() {
+    openBoardDetail(e) {
       // 게시글의 seq 가지고 가서 BoardDetail로 이동
-
-      console.log(this.String);
+      const seq = e.target.getAttribute("seq");
+      console.log(seq);
+      router.push({ name: "BoardDetail", params: {seq: seq}})
+      //오픈하면 조회수를 1씩 늘림.(put 필요)
     },
     getAllBoard() {
-      return {
-        // API 연동하여 데이터 가져오기
-      };
+      // API 연동하여 데이터 가져오기
+      // const BASE_URL = "https://jssampletest.herokuapp.com/api/board/all";
+      // this.$axios.get(BASE_URL)
+      //       .then(res => {
+      //           console.log(res.data);
+      //           this.content = res.data.data;
+      //       })
+      //       .catch(function(error){
+      //           console.log(error);
+      //       });
     },
+    // created() {
+    //   this.getAllBoard();
+    // },
   },
-  props: {
-    msg: String,
-  },
+  props: {},
 };
 </script>
 
@@ -283,5 +298,10 @@ a {
   display: inline-block;
   margin-left: 5%;
   margin-right: 5%;
+  width: 300px;
+}
+#section {
+  width: 800px;
+  margin: 0 auto;
 }
 </style>

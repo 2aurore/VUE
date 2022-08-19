@@ -5,8 +5,8 @@
       <div id="titleArea">
         <h2>{{ 제목 }}</h2>
         <div>
-            <p>작성일자</p>
-            <p>조회수</p>
+          <p>작성일자</p>
+          <p>조회수</p>
         </div>
       </div>
       <div id="content">
@@ -19,21 +19,30 @@
         <!-- v-for 사용해서 댓글 출력 -->
       </div>
     </div>
-    
   </div>
 </template>
 
 <script>
+// import router from "../../router/router.js";
+
 export default {
   name: "BoardDetail",
+  // boardSeq: router.props.seq,
+
   data() {
+    console.log("페이지전환");
+    console.log("seq : ", this.boardSeq);
+
     return {
       // this.getAllBoard()
     };
   },
   methods: {},
   props: {
-    msg: String,
+    boardSeq: {
+      type: String,
+      default: "",
+    },
   },
 };
 </script>

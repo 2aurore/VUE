@@ -26,7 +26,7 @@
   <!-- default login page layout -->
   <div class="login">
     <div>
-      <h1>{{ msg }}</h1>
+      <h1>LOGIN</h1>
       <div>
         <ul style="text-align: center">
           <li>
@@ -64,7 +64,7 @@ export default {
       //console.log("onClickLogin press");
       console.log(this.$data);
       // const URL = '/auth/login';
-      const URL = "https://jssampletest.herokuapp.com/api";
+      const URL = "https://jssampletest.herokuapp.com/api/login";
 
       // let callUrl = apiBaseUrl + URL;
       // console.log(callUrl);
@@ -86,6 +86,7 @@ export default {
         alert("비밀번호 중복체크를 확인해주세요.");
       } else {
         //회원가입 API 호출
+        console.log("회원가입");
       }
     },
     // password 중복체크
