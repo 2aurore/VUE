@@ -1,16 +1,40 @@
 <template>
+  <!-- root is app.vue -->
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <HelloWorld msg="props.msg" v-on:show-log="printText" />
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 
+// app.vue가 create 되기 전에 innerVue 생성
+//const innerVue = {
+//  components: HelloWorld,
+//}
+//console.log(innerVue);
+
 export default {
   name: 'App',
   components: {
     HelloWorld
-  }
+  },
+  methods: {
+    printText: function() {
+      console.log("!!go to parent!!");
+    },
+  },
+  // beforeCreate() {
+  //   console.log("before create App.vue");
+  // },
+  // created() {
+  //   console.log("create App.vue");
+  // },
+  // mounted() {
+  //   console.log("mounted App.vue");
+  // },
+  // updated() {
+  //   console.log("updated App.vue");
+  // },
 }
 </script>
 
